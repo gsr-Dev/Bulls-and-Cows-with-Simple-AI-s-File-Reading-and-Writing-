@@ -31,7 +31,6 @@ public class Player implements SecretCode {
 
 	private boolean isAlpha(String inputString) {
 		char[] c = inputString.toCharArray();
-
 		for (int i = 0; i < c.length; i++) {
 			if(!Character.isLetter(c[i])) {
 				return false;
@@ -42,8 +41,7 @@ public class Player implements SecretCode {
 
 	private boolean notUnique(String inputString) {
 		char[] c = inputString.toCharArray();
-
-		for (int i = 0; i < c.length; i++) {
+		for (int i = 0; i < c.length -1; i++) {
 			for (int j = i + 1; j < c.length; j++) {
 				if (c[i] == c[j]) {
 					return true;
@@ -52,5 +50,4 @@ public class Player implements SecretCode {
 		}
 		return false;
 	}
-
 }

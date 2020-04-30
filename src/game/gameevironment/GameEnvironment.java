@@ -25,9 +25,6 @@ public class GameEnvironment {
 		String computerCode = newComputer.generateCode();
 		System.out.println(computerCode);
 		String playerCode;
-
-
-
 		int count = 0;
 		do {
 			playerCode = newPlayer.generateCode();
@@ -44,7 +41,7 @@ public class GameEnvironment {
 	}
 
 	private void welcomeMessage() {
-		System.out.println("Hello there!!! Welcome to Bulls and Cows!");
+		System.out.println("Hello there!!! Welcome to Bulls and Cows!\n");
 	}
 
 	private void getAndSetNewPlayer() {
@@ -52,7 +49,7 @@ public class GameEnvironment {
 		while (true) {
 			String enterNewPlayerName = Keyboard.readInput();
 			if (enterNewPlayerName.isBlank()) {
-				System.out.println("Please type in a name.");
+				System.out.println("Please type in a name.\n");
 			} else {
 				newPlayer.setPlayerName(enterNewPlayerName);
 				System.out.println(newPlayer.getPlayerName() + ", is it?\n");
@@ -91,6 +88,4 @@ public class GameEnvironment {
 		}
 		return new int[]{bulls, cows};
 	}
-
-
 }
