@@ -4,55 +4,93 @@ import game.Keyboard;
 import game.gameevironment.players.Computer;
 import game.gameevironment.players.Player;
 
+import java.util.*;
+
 public class GameEnvironment {
-	public void start() {
-		welcomeMessage();
-		askName();
-		Player newPlayer = new Player(getCommand());
-		returnGreeting(newPlayer.getPlayerName());
-		howToPlay(newPlayer.getPlayerName());
-		selectOpponent();
+	private final Player newPlayer;
+	private final Computer newComputer;
+
+	public GameEnvironment() {
+		newPlayer = new Player();
+		newComputer = new Computer();
 	}
 
-	private String getCommand() {
-		System.out.println();
-		return Keyboard.readInput();
+	protected void start() {
+		welcomeMessage();
+		getAndSetNewPlayer();
+	}
+
+	protected void runGame() {
+		askForCode();
+		String computerCode = newComputer.generateCode();
+		System.out.println(computerCode);
+		String playerCode;
+
+
+
+		int count = 0;
+		do {
+			playerCode = newPlayer.generateCode();
+			int[] counters = counters(playerCode, computerCode);
+			System.out.println("Bulls: " + counters[0] + " Cows: " + counters[1]);
+			count++;
+
+			if(sameCode(playerCode, computerCode)) {
+				System.out.println("You win!");
+			} else if (count == 7) {
+				System.out.println("You took too many tries :(");
+			}
+		} while (!sameCode(playerCode, computerCode));
 	}
 
 	private void welcomeMessage() {
 		System.out.println("Hello there!!! Welcome to Bulls and Cows!");
 	}
 
-	private void askName() {
-		System.out.println("What is your name, friend?");
-	}
-
-	private void returnGreeting(String playerName) {
-		System.out.println(playerName + ", is it?");
-	}
-
-	private void howToPlay(String playerName) {
-		System.out.println("Well, here's how to play, " + playerName +
-				": choose a secret code of four digits; each digit must be unique, got it?");
-	}
-
-	private void selectOpponent() {
-		System.out.println("But first select an Opponent. Who will it be? Easy, Medium, or Hard");
-		String selection = Keyboard.readInput();
-
-		switch (selection.toLowerCase()) {
-			case "easy":
-				System.out.println("Easy it is.");
+	private void getAndSetNewPlayer() {
+		System.out.println("What is your name?");
+		while (true) {
+			String enterNewPlayerName = Keyboard.readInput();
+			if (enterNewPlayerName.isBlank()) {
+				System.out.println("Please type in a name.");
+			} else {
+				newPlayer.setPlayerName(enterNewPlayerName);
+				System.out.println(newPlayer.getPlayerName() + ", is it?\n");
 				break;
-			case "medium":
-				System.out.println("Medium it is.");
-				break;
-			case "hard":
-				System.out.println("Hard it is.");
-				break;
-			default:
-				System.out.println("Pick someone.");
+			}
 		}
 	}
+
+	private void askForCode() {
+		System.out.println("Type in your secret code");
+	}
+
+	private boolean sameCode(String playerCode, String computerCode) {
+		return playerCode.equals(computerCode);
+	}
+
+	private int[] counters(String playerCode, String computerCode) {
+		int bulls = 0;
+		int cows = 0;
+
+		String p = playerCode.trim();
+		String c = computerCode.trim();
+
+
+		for (int i = 0; i < c.length(); i++) {
+			if (playerCode.charAt(i) == computerCode.charAt(i)) {
+				bulls++;
+			} else {
+				for (int j = 0; j < p.length(); j++) {
+					if (playerCode.charAt(i) == computerCode.charAt(j)) {
+						cows++;
+					}
+				}
+
+			}
+		}
+		return new int[]{bulls, cows};
+	}
+
 
 }

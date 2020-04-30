@@ -19,7 +19,7 @@ import java.io.*;
 
 public class Keyboard {
 
-    private static Scanner in = new Scanner(System.in);
+    private static final Scanner in = new Scanner(System.in);
     private static boolean redirected = false;
 
     public static String readInput() {
