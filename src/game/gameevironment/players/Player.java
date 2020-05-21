@@ -1,9 +1,9 @@
 package game.gameevironment.players;
 
 public class Player {
-	private String savedCode;
+	private final String savedCode;
 
-	public void setSavedCode(String code) {
+	public Player(String code) {
 		this.savedCode = code;
 	}
 
