@@ -36,6 +36,7 @@ public class GameEnvironment {
 			}
 		}
 		computer = newAI;
+		spacer();
 	}
 
 
@@ -43,8 +44,9 @@ public class GameEnvironment {
 		System.out.println("\n");
 		askPlayerForCode();
 		newPlayer = new Player(playerKeyboardInput());
-		System.out.println("\n");
-		System.out.println("Your secret code is: " + newPlayer.getSavedCode());
+		System.out.println("\nYour secret code is: " + newPlayer.getSavedCode());
+		System.out.println("Computer has selected a code!");
+		spacer();
 		computer.setSavedCode();
 
 		if (computer.difficulty() == Difficulty.EASY) {
@@ -65,9 +67,6 @@ public class GameEnvironment {
 		System.out.print("Type in your secret code --> ");
 	}
 
-
-
-
 	private static boolean sameCode(String codeOne, String codeTwo) {
 		return codeOne.equals(codeTwo);
 	}
@@ -76,18 +75,11 @@ public class GameEnvironment {
 	private static int[] counters(String codeOne, String codeTwo) {
 		int bulls = 0;
 		int cows = 0;
-
-		String trimmedCode = codeOne.trim();
-
-		for (int i = 0; i < trimmedCode.length(); i++) {
+		for (int i = 0; i < 4; i++) {
 			if (codeOne.charAt(i) == codeTwo.charAt(i)) {
 				bulls++;
-			} else {
-				for (int j = 0; j < trimmedCode.length(); j++) {
-					if (codeOne.charAt(i) == codeTwo.charAt(j)) {
-						cows++;
-					}
-				}
+			} else if (codeOne.contains(codeTwo.charAt(i)+"")) {
+				cows++;
 			}
 		}
 		return new int[]{bulls, cows};
@@ -150,21 +142,18 @@ public class GameEnvironment {
 	private void easyMode() {
 		String comp = getComputerCode();
 		String player = getPlayerCode();
-		System.out.println(getComputerCode());
 		runGuesses(comp, player);
 
 	}
 	private void mediumMode() {
 		String comp = getComputerCode();
 		String player = getPlayerCode();
-		System.out.println(getComputerCode());
 		runGuesses(comp, player);
 	}
 
 	private void hardMode() {
 		String comp = getComputerCode();
 		String player = getPlayerCode();
-		System.out.println(getComputerCode());
 		runGuesses(comp, player);
 	}
 
@@ -172,11 +161,13 @@ public class GameEnvironment {
 		int outerCounter = 0;
 		String tempGuess = "";
 		List<String> newList = null;
+		System.out.println("GAME ON!");
 		while (true) {
 			String computerGuess = "";
 			//Player guess
 			System.out.print("Type in your guess here --> ");
 			String playerGuess = playerGuess();
+			System.out.println("\n");
 			//Computer guess
 
 			if (computer.difficulty() == Difficulty.HARD) {
@@ -202,24 +193,31 @@ public class GameEnvironment {
 			System.out.println("Computer guess: " + computerGuess);
 
 			//How many Bulls and how many Cows the COMPUTER got compared to the player
-			int[] computerCounters = counters(computerGuess, playerGuess);
+			int[] computerCounters = counters(computerGuess, playerSecretCode);
 			System.out.println("Bulls: " + computerCounters[0] + " Cows: " + computerCounters[1]);
-			System.out.println("---\n");
+			spacer();
 
 			//And one to counter per turn
 			outerCounter++;
 			//Game Status
-			if(sameCode(playerGuess, computerSecretCode)) {
+			if(sameCode(playerGuess, computerSecretCode) && outerCounter <=7) {
 				System.out.println("You win! :)");
+				spacer();
 				break;
-			} else if (outerCounter > 7) {
+			} else if (sameCode(computerGuess, playerSecretCode) && outerCounter <=7) {
+				System.out.println("Computer wins! :(");
+				spacer();
+				break;
+			} else if (outerCounter == 7) {
 				System.out.println("Draw!");
-				break;
-			} else if (sameCode(computerGuess, playerSecretCode)) {
-				System.out.println("Computer wins!");
+				spacer();
 				break;
 			}
 		}
+	}
+
+	private void spacer() {
+		System.out.println("\n------");
 	}
 }
 
