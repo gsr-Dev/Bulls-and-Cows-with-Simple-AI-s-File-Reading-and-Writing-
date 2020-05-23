@@ -1,4 +1,4 @@
-package game.gameevironment.players;
+package game.gameevironment.computer;
 
 
 import java.util.ArrayList;
@@ -33,30 +33,30 @@ public class Hard extends Computer {
 
 
 	public List<String> analyzer(String hardAIGuess, String playersSavedCode, List<String> codesToPickFrom) {
-		String string = "";
+		StringBuilder pattern = new StringBuilder();
 		for (int i = 0; i < 4; i++) {
 			boolean notMatching = true;
 			if (hardAIGuess.charAt(i) == playersSavedCode.charAt(i)) {
-				string+=hardAIGuess.charAt(i);
+				pattern.append(hardAIGuess.charAt(i));
 				notMatching = false;
 			}
 			for (int j = 0; j < 4; j++) {
 				if (hardAIGuess.charAt(i) == playersSavedCode.charAt(j) && hardAIGuess.indexOf(hardAIGuess.charAt(i)) != playersSavedCode.indexOf(hardAIGuess.charAt(i))) {
 					char[] temp = playersSavedCode.toCharArray();
 					Arrays.sort(temp);
-					string+="["+temp[0]+temp[1]+temp[2]+temp[3]+"]";
+					pattern.append("[").append(temp[0]).append(temp[1]).append(temp[2]).append(temp[3]).append("]");
 					notMatching = false;
 				}
 			}
 			if (notMatching) {
-				string+=".";
+				pattern.append(".");
 			}
 		}
 
 		List<String> newList = new ArrayList<>();
 
 		for (String next : codesToPickFrom) {
-			if (Pattern.matches(string, next) && !next.equals(hardAIGuess)) {
+			if (Pattern.matches(pattern.toString(), next) && !next.equals(hardAIGuess)) {
 					newList.add(next);
 			}
 		}
@@ -70,7 +70,7 @@ public class Hard extends Computer {
 	}
 
 	public String toString() {
-		return "This is the Hard AI";
+		return "Hard AI";
 	}
 
 

@@ -1,4 +1,4 @@
-package game.gameevironment.players;
+package game.gameevironment.computer;
 
 
 public class Medium extends Computer {
@@ -25,7 +25,7 @@ public class Medium extends Computer {
 	}
 
 	public String toString() {
-		return "This is the Medium AI";
+		return "Medium AI";
 	}
 
 	@Override

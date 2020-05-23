@@ -1,4 +1,4 @@
-package game.gameevironment.players;
+package game.gameevironment.computer;
 import java.util.ArrayList;
 import java.util.List;
 

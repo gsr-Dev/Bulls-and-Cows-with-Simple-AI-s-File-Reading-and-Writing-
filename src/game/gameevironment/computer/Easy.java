@@ -1,4 +1,4 @@
-package game.gameevironment.players;
+package game.gameevironment.computer;
 
 public class Easy extends Computer {
 	private String savedCode;
@@ -23,7 +23,7 @@ public class Easy extends Computer {
 	}
 
 	public String toString() {
-		return "This is the Easy AI";
+		return "Easy AI";
 	}
 
 	@Override
