@@ -14,8 +14,10 @@ package game;/*
  * This will assign the line of text entered at the keyboard (as a String) to the input variable.
  *
  */
-import java.util.*;
-import java.io.*;
+
+import java.io.IOException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class Keyboard {
 

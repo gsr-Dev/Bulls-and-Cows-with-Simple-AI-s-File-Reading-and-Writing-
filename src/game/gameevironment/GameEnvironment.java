@@ -1,8 +1,10 @@
 package game.gameevironment;
 
 import game.Keyboard;
-import game.gameevironment.player.*;
 import game.gameevironment.computer.*;
+import game.gameevironment.player.Auto;
+import game.gameevironment.player.Player;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
