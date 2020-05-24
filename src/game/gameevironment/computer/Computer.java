@@ -5,6 +5,9 @@ import java.util.List;
 public abstract class Computer {
 	protected final List<String> codeList = createCodeList();
 
+	/**
+	 *This method generates all the possible unique 4 digit codes and returns an ArrayList
+	 */
 	protected List<String> createCodeList () {
 		final List<String> CODE_LIST = new ArrayList<>();
 		String digits = "";

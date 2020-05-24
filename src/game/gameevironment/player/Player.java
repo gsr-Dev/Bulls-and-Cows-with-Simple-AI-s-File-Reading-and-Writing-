@@ -12,12 +12,10 @@ public class Player {
 	private final List<String> list;
 	private final Auto isAuto;
 
-
-
 	public Player(String code) {
 		this.savedCode = code;
-		list = null;
 		this.isAuto = Auto.NO;
+		this.list = null;
 	}
 
 
@@ -39,6 +37,9 @@ public class Player {
 		return list;
 	}
 
+	/**
+	 * This method takes a text file of the guesses for the auto-guesser
+	 */
 	public List<String> supplyGuesses(File file) {
 		List<String> list = new ArrayList<>();
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {

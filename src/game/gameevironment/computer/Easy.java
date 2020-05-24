@@ -3,8 +3,6 @@ package game.gameevironment.computer;
 public class Easy extends Computer {
 	private String savedCode;
 
-
-	//Getter and Setter for Easy Computer
 	@Override
 	public void setSavedCode() {
 		int randomCode = (int) (Math.random() * codeList.size());
