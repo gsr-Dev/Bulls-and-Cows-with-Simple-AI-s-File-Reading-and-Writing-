@@ -22,7 +22,9 @@ public class GameEnvironment {
 		printWelcomeMessage();
 	}
 
-
+	/**
+	This Method Runs the game
+	 **/
 	protected void runGame() {
 		newComputer();
 		newPlayer();
@@ -31,17 +33,15 @@ public class GameEnvironment {
 
 		if (computer.difficulty() == Difficulty.EASY) {
 			System.out.println("EASY AI has selected a code!\n");
-			easyMode();
 		} else if (computer.difficulty() == Difficulty.MEDIUM) {
 			System.out.println("MEDIUM AI has selected a code!\n");
-			mediumMode();
 		} else if (computer.difficulty() == Difficulty.HARD) {
 			System.out.println("HARD AI has selected a code!\n");
-			hardMode();
 		}
+		runGuesses(computer.getSavedCode(), newPlayer.getSavedCode());
 	}
 
-	private static void printWelcomeMessage() {
+	private void printWelcomeMessage() {
 		System.out.println("Hello there!!! Welcome to Bulls and Cows!\n");
 	}
 
@@ -162,32 +162,10 @@ public class GameEnvironment {
 		return false;
 	}
 
-	private String getComputerCode() {
-		return computer.getSavedCode();
-	}
 
-	private String getPlayerCode() {
-		return newPlayer.getSavedCode();
-	}
 
 	private String playerGuess() {
 		return playerKeyboardInput();
-	}
-
-	//Easy game
-	private void easyMode() {
-		String comp = getComputerCode();
-		runGuesses(comp, getPlayerCode());
-	}
-
-	private void mediumMode() {
-		String comp = getComputerCode();
-		runGuesses(comp, getPlayerCode());
-	}
-
-	private void hardMode() {
-		String comp = getComputerCode();
-		runGuesses(comp, getPlayerCode());
 	}
 
 	private void runGuesses(String computerSecretCode, String playerSecretCode) {
